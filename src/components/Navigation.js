@@ -22,6 +22,9 @@ import GuidedJournalingMain from "../screens/guided journaling/guidedJournalingM
 import GuiedJournalingHeader from "../headers/guiedJournalingHeader";
 import GuidedJournalingTips from "../screens/guided journaling/guidedJournalingTips";
 import SleepJournal from "../screens/guided journaling/sleepJournal";
+import DailyReminderScreen from "../screens/splash screens/dailyReminder/dailyReminderScreen";
+import TabNavigator from "./TabNavigator";
+import SetReminderScreen from "../screens/splash screens/dailyReminder/setReminderScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,19 +32,28 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="guided journaling main"
           component={GuidedJournalingMain}
           options={{
             headerTitle: "Journal",
             // headerRight: () => <GuiedJournalingHeader />,
           }}
-        />
-        <Stack.Screen
+        /> */}
+        {/* <Stack.Screen name="Tab Navigator" component={TabNavigator} /> */}
+        {/* <Stack.Screen
           name="guided journaling tips"
           component={GuidedJournalingTips}
+        /> */}
+        {/* <Stack.Screen name="Sleep Journal" component={SleepJournal} /> */}
+        <Stack.Screen name="Daily Reminder" component={DailyReminderScreen} />
+        <Stack.Screen
+          name="Set Reminder"
+          component={SetReminderScreen}
+          options={{
+            title: "Reminder",
+          }}
         />
-        <Stack.Screen name="Sleep Journal" component={SleepJournal} />
         {/* <Stack.Screen
           name="welcome"
           component={WelcomeScreen}

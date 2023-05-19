@@ -224,7 +224,7 @@ const Profile = () => {
                 <DateTimePicker
                   testID="dateTimePicker"
                   placeholderText="Date of Birth"
-                  mode="date"
+                  mode="time"
                   is24Hour={true}
                   onChange={onChange}
                 />

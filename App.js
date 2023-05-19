@@ -25,6 +25,7 @@ import ForgotPassword from "./src/screens/ForgotPassword";
 import Signin from "./src/screens/Signin";
 import MainScreen from "./src/screens/MainScreen";
 import TabNavigator from "./src/components/TabNavigator";
+import PersonalInsightCard from "./src/components/PersonalInsightCard";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -44,8 +45,9 @@ export default function App() {
   }
   return (
     <PaperProvider>
+      {/* <PersonalInsightCard /> */}
       {/* <NavigationContainer>
-        <TabNavigator />  
+        <TabNavigator />
       </NavigationContainer> */}
       {/* <MainScreen /> */}
       <Navigation />

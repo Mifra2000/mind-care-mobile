@@ -27,7 +27,7 @@ const GuidedJournalCard = ({ key, image, title }) => {
               });
             }
           }
-          console.log("hellpo");
+          console.log("hello");
         }}
       >
         <Card>
