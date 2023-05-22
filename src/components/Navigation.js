@@ -36,6 +36,10 @@ import FiveSensesGroundingTechniqueTip1 from "../screens/dailyReminder/fiveSense
 import FiveSensesGroundingTechniqueAudio from "../screens/dailyReminder/fiveSensesGroundingTechnique/fiveSensesGroundingTechniqueAudio";
 import FiveSenseGroundingTechniqueOverview from "../screens/dailyReminder/fiveSensesGroundingTechnique/fiveSenseGroundingTechniqueOverview";
 import FiveSenseGroundingTechniqueLastTip from "../screens/dailyReminder/fiveSensesGroundingTechnique/fiveSenseGroundingTechniqueLastTip";
+import UnplugAndUnwindTip from "../screens/dailyReminder/unplugAndUnwind/unplugAndUnwindTip";
+import UnplugAndUnwindAudio from "../screens/dailyReminder/unplugAndUnwind/unplugAndUnwindAudio";
+import UnplugAndUnwindOverview from "../screens/dailyReminder/unplugAndUnwind/unplugAndUnwindOverview";
+import UnpluAndUnwindLastTip from "../screens/dailyReminder/unplugAndUnwind/unpluAndUnwindLastTip";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -108,6 +112,26 @@ const Navigation = () => {
       <Stack.Screen
         name="five senses grounding technique last tip"
         component={FiveSenseGroundingTechniqueLastTip}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="unplug and unwind"
+        component={UnplugAndUnwindTip}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="unplug and unwind audio"
+        component={UnplugAndUnwindAudio}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="unplug and unwind overview"
+        component={UnplugAndUnwindOverview}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="unplug and unwind last tip"
+        component={UnpluAndUnwindLastTip}
         options={{ headerShown: false }}
       />
       {/* <Stack.Screen

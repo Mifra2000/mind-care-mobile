@@ -4,34 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import color from "../../../constants/colors";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-const DeepBreathingExercise = ({ navigation }) => {
-  const [tip1, setTip1] = useState(
-    "This deep breathing exercise lowers the heart rate, making you feel composed and focused. A great way to start your morning."
-  );
-
-  const next = () => {
-    if (
-      tip1 == "Please lower your volume and listen to this guided audio clip."
-    ) {
-      navigation.navigate("deep breathing exercise audio");
-    } else {
-      setTip1("Please lower your volume and listen to this guided audio clip.");
-    }
-  };
-
-  const back = () => {
-    if (
-      tip1 ==
-      "This deep breathing exercise lowers the heart rate, making you feel composed and focused. A great way to start your morning."
-    ) {
-      navigation.goBack("Task");
-    } else {
-      setTip1(
-        "This deep breathing exercise lowers the heart rate, making you feel composed and focused. A great way to start your morning."
-      );
-    }
-  };
-
+const UnplugAndUnwindTip = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.parentContainer}>
       <View style={styles.upperContainer}>
@@ -40,21 +13,33 @@ const DeepBreathingExercise = ({ navigation }) => {
             <Entypo name="cross" size={24} color="white" />
           </Text>
         </TouchableOpacity>
-        <Text style={styles.heading}>DEEP BREATHING EXERCISE</Text>
+
+        <Text style={styles.heading}>UNPLUG AND UNWIND</Text>
       </View>
 
       <View>
         <View style={styles.container}>
-          <Text style={styles.text}>{tip1}</Text>
+          <Text style={styles.text}>
+            You're about to listen to an audio recording.
+          </Text>
+          <Text style={styles.heading}>
+            Put your earphones and press play when you're ready.
+          </Text>
         </View>
 
         <View style={styles.iconContainer}>
-          <TouchableOpacity onPress={back} style={styles.icon}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Task")}
+            style={styles.icon}
+          >
             <Text>
               <AntDesign name="left" size={24} color="black" />
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={next} style={styles.icon}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("unplug and unwind audio")}
+            style={styles.icon}
+          >
             <Text>
               <AntDesign name="right" size={24} color="black" />
             </Text>
@@ -67,18 +52,17 @@ const DeepBreathingExercise = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   parentContainer: {
-    backgroundColor: color.orange,
+    backgroundColor: color.grey,
     flex: 1,
   },
   upperContainer: {
     flexDirection: "row",
+    marginTop: 10,
   },
   heading: {
-    // alignSelf: "center",
     fontSize: 18,
     color: "white",
     textAlign: "center",
-    marginLeft: 50,
   },
   icon: {
     backgroundColor: "white",
@@ -99,7 +83,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "black",
     height: 150,
     marginTop: 250,
-    marginHorizontal: 25,
+    marginHorizontal: 30,
     justifyContent: "center",
   },
   text: {
@@ -125,4 +109,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-export default DeepBreathingExercise;
+export default UnplugAndUnwindTip;

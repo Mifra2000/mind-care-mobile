@@ -1,37 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import color from "../../../constants/colors";
 import { AntDesign } from "@expo/vector-icons";
 
-const FiveSenseGroundingTechniqueLastTip = ({ navigation }) => {
-  const [title, setTitle] = useState("Great Work");
-  const [tip1, setTip1] = useState(
-    "Use this exercise to bring yourself back to the present moment whenever you're feeling overwhelmed."
-  );
-
-  const next = () => {
-    if (tip1 == "You've completed the exercise.") {
-      navigation.navigate("Task");
-    } else {
-      setTip1("You've completed the exercise.");
-      setTitle("Well done!");
-    }
-  };
-  const back = () => {
-    if (tip1 == "You've completed the exercise.") {
-      setTip1(
-        "Use this exercise to bring yourself back to the present moment whenever you're feeling overwhelmed."
-      );
-    } else if (
-      tip1 ==
-      "Use this exercise to bring yourself back to the present moment whenever you're feeling overwhelmed."
-    ) {
-      navigation.goBack("five sense grounding technique overview");
-    }
-  };
-
+const UnplugAndUnwindLastTip = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.parentContainer}>
       <View style={styles.upperContainer}>
@@ -45,22 +19,25 @@ const FiveSenseGroundingTechniqueLastTip = ({ navigation }) => {
 
       <View>
         <View style={styles.container}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.text}>{tip1}</Text>
+          <Text style={styles.title}>Well Done!</Text>
+          <Text style={styles.text}>You've completed the exercise.</Text>
         </View>
       </View>
       <View style={styles.iconContainer}>
         <TouchableOpacity
           style={styles.icon}
           onPress={() => {
-            navigation.goBack("five senses grounding technique tip1");
+            navigation.goBack("unplug and unwind audio");
           }}
         >
           <Text>
             <AntDesign name="left" size={24} color="black" />
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.icon} onPress={next}>
+        <TouchableOpacity
+          style={styles.icon}
+          onPress={() => navigation.navigate("Task")}
+        >
           <Text>
             <AntDesign name="right" size={24} color="black" />
           </Text>
@@ -133,4 +110,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
 });
-export default FiveSenseGroundingTechniqueLastTip;
+export default UnplugAndUnwindLastTip;

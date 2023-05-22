@@ -5,19 +5,18 @@ import color from "../../../constants/colors";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-const FiveSensesGroundingTechniqueAudio = ({ navigation }) => {
+
+const UnplugAndUnwindAudio = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.parentContainer}>
       <View style={styles.upperContainer}>
         <Text style={{ marginLeft: 10 }}>
           <Entypo name="cross" size={24} color="white" />
         </Text>
-        <Text style={styles.heading}>
-          GROUNDING TECHNIQUES TO INCREASE FOCUS
-        </Text>
+        <Text style={styles.heading}>UNPLUG AND UNWIND</Text>
       </View>
       <View style={styles.mainContainer}>
-        <Text style={styles.title}>Activate your five senses</Text>
+        <Text style={styles.title}>Deep breathing exercise</Text>
         <View>
           <AntDesign name="play" size={90} color="white" style={styles.audio} />
           <Text
@@ -43,7 +42,7 @@ const FiveSensesGroundingTechniqueAudio = ({ navigation }) => {
         <TouchableOpacity
           style={styles.forBackContainer}
           onPress={() => {
-            navigation.navigate("five sense grounding technique overview");
+            navigation.navigate("unplug and unwind overview");
           }}
         >
           <Text>Text Mode</Text>
@@ -54,7 +53,7 @@ const FiveSensesGroundingTechniqueAudio = ({ navigation }) => {
         <TouchableOpacity
           style={styles.icon}
           onPress={() => {
-            navigation.goBack("five senses grounding technique tip1");
+            navigation.goBack("unplug and unwind");
           }}
         >
           <Text>
@@ -64,7 +63,7 @@ const FiveSensesGroundingTechniqueAudio = ({ navigation }) => {
         <TouchableOpacity
           style={styles.icon}
           onPress={() => {
-            navigation.navigate("five senses grounding technique last tip");
+            navigation.navigate("unplug and unwind last tip");
           }}
         >
           <Text>
@@ -84,13 +83,6 @@ const styles = StyleSheet.create({
   },
   upperContainer: {
     flexDirection: "row",
-    marginTop: 10,
-  },
-  heading: {
-    fontSize: 14,
-    color: "white",
-    textAlign: "center",
-    marginLeft: 10,
   },
   mainContainer: {
     // backgroundColor: "red",
@@ -126,7 +118,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 10,
   },
-
+  heading: {
+    fontSize: 18,
+    color: "white",
+    textAlign: "center",
+    marginLeft: 50,
+  },
   icon: {
     backgroundColor: "white",
     height: 40,
@@ -143,4 +140,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
 });
-export default FiveSensesGroundingTechniqueAudio;
+
+export default UnplugAndUnwindAudio;

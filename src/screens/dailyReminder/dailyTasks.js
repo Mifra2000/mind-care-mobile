@@ -106,7 +106,9 @@ const DailyTasks = ({ navigation }) => {
       </View>
       <View>
         <Text style={styles.heading}>Evening</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("unplug and unwind")}
+        >
           <TaskCard
             title="Unplug and Unwind"
             content="A 1-minute meditation will help you unplug and let go"

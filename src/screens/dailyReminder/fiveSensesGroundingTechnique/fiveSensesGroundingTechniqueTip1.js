@@ -64,9 +64,16 @@ const FiveSensesGroundingTechniqueTip1 = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.parentContainer}>
       <View style={styles.upperContainer}>
-        <Text style={{ marginLeft: 10 }}>
-          <Entypo name="cross" size={24} color="white" />
-        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Task");
+          }}
+        >
+          <Text style={{ marginLeft: 10 }}>
+            <Entypo name="cross" size={24} color="white" />
+          </Text>
+        </TouchableOpacity>
+
         <Text style={styles.heading}>
           GROUNDING TECHNIQUES TO INCREASE FOCUS
         </Text>

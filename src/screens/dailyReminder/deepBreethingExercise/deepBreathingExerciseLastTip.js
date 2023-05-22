@@ -10,10 +10,17 @@ const DeepBreathingExerciseLastTip = ({ navigation }) => {
   const [heading, setHeading] = useState("DEEP BREATHING EXERCISE");
 
   const next = () => {
-    setTip1(
+    if (
+      tip1 ==
       "Setting your goals daily centers your focus and increase your productivity. Come back tomorrow morning!"
-    );
-    setHeading("PLANNING YOUR DAY");
+    ) {
+      navigation.navigate("Task");
+    } else {
+      setTip1(
+        "Setting your goals daily centers your focus and increase your productivity. Come back tomorrow morning!"
+      );
+      setHeading("PLANNING YOUR DAY");
+    }
   };
 
   return (
