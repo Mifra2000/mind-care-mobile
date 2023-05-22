@@ -34,12 +34,7 @@ const GuidedJournalingTips = ({ navigation, route }) => {
   return (
     <SafeAreaView>
       {tip1 && (
-        <View
-        //   style={{
-        //     marginVertical: 250,
-        //     marginHorizontal: 25,
-        //   }}
-        >
+        <View>
           <View style={styles.container}>
             <Text style={styles.text}>{tip1}</Text>
           </View>

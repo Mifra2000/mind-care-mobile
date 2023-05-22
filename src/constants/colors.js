@@ -5,6 +5,7 @@ const color = {
   lightGrey: "#D3D3D3",
   darkGrey: "#696B81",
   lightPink: "#FFEBEB",
+  orange: "#E97451",
 };
 
 export default color;

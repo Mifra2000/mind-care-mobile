@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 // import Checkbox from "expo-checkbox";
+import { Checkbox } from "react-native-paper";
 
-const SetReminderCard = ({ title, image, radioBox }) => {
+const SetReminderCard = ({ title, image, checkBoxValue, change }) => {
   const [isSelected, setSelection] = useState(false);
+  const [checked, setChecked] = React.useState(false);
 
   const check = () => {
     console.log("hello");
@@ -13,11 +15,17 @@ const SetReminderCard = ({ title, image, radioBox }) => {
     <View style={styles.cardContainer}>
       {/* <TouchableOpacity onPress={check}> */}
       {/*     <Checkbox value={isSelected} onValueChange={setSelection} /> */}
+      <Checkbox
+        status={checked ? "checked" : "unchecked"}
+        onPress={() => {
+          setChecked(!checked);
+        }}
+      />
       <Image
         resizeMode="contain"
         style={{
-          height: "70%",
-          width: "70%",
+          height: "40%",
+          width: "60%",
           alignSelf: "center",
         }}
         source={{

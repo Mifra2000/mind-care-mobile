@@ -26,6 +26,7 @@ import Signin from "./src/screens/Signin";
 import MainScreen from "./src/screens/MainScreen";
 import TabNavigator from "./src/components/TabNavigator";
 import PersonalInsightCard from "./src/components/PersonalInsightCard";
+import DeepBreathingExercise from "./src/screens/dailyReminder/deepBreethingExercise/deepBreathingExercise";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -45,12 +46,13 @@ export default function App() {
   }
   return (
     <PaperProvider>
+      {/* <DeepBreathingExercise /> */}
       {/* <PersonalInsightCard /> */}
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <TabNavigator />
-      </NavigationContainer> */}
+      </NavigationContainer>
       {/* <MainScreen /> */}
-      <Navigation />
+      {/* <Navigation /> */}
       {/* <ForgotPassword /> */}
       {/* <Profile /> */}
       {/* <Signin /> */}

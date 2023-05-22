@@ -5,7 +5,7 @@ const DailyReminderScreen = ({ navigation }) => {
   return (
     <View>
       <Text>Daily Reminder</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Set Reminder")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Reminders")}>
         <Text>Set Reminder</Text>
       </TouchableOpacity>
     </View>
