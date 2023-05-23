@@ -7,6 +7,8 @@ import color from "./src/constants/colors";
 import Navigation from "./src/components/Navigation";
 import Profile from "./src/screens/Profile";
 import { NavigationContainer } from "@react-navigation/native";
+import axios from "axios";
+axios.defaults.baseURL = "https://mind-care.up.railway.app/api/v1";
 
 // import Settings from "./src/screens/Settings";
 import {
@@ -46,15 +48,11 @@ export default function App() {
   }
   return (
     <PaperProvider>
-      {/* <DeepBreathingExercise /> */}
-      {/* <PersonalInsightCard /> */}
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <TabNavigator />
-      </NavigationContainer>
-      {/* <MainScreen /> */}
+      </NavigationContainer> */}
       {/* <Navigation /> */}
-      {/* <ForgotPassword /> */}
-      {/* <Profile /> */}
+      <Profile />
       {/* <Signin /> */}
       {/* <Profile /> */}
       {/* <Settings /> */}

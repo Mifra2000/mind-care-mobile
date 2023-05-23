@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     // margin: 20,
     elevation: 5,
-    borderRadius: 10,
+    borderRadius: 20,
     width: "90%",
     alignSelf: "center",
-    padding: 15,
+    padding: 20,
   },
 });
 

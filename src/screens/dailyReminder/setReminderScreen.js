@@ -22,58 +22,43 @@ const SetReminderScreen = ({ route, navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [reminderTime, setReminderTime] = useState("00:00");
   const [dailyReminder, setDailyReminder] = useState(true);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [selectedCard, setSelectedCard] = useState(null);
   const [visible, setVisible] = useState(false);
   const [customTask, setCustomTask] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [reminderId, setReminderId] = useState(null);
+  const [reminderObject, setReminderObject] = useState({
+    id: null,
+    title: null,
+    time: "00:00",
+  });
 
-  if (route.flag == "with params") {
-    const { reminder_type, reminder_time } = route.params;
-  }
-  const toggleBottomNavigationView = () => {
-    //Toggling the visibility state of the bottom sheet
-    setVisible(!visible);
-  };
-
-  useEffect(() => {
-    currentTime();
-  }, []);
-
-  const cardData = [
+  const [cardData, setCardData] = useState([
     {
       id: 0,
       title: "After getting out of bed",
-      checkBoxState: false,
       image:
         "https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fsunrise.png?alt=media&token=5c7f0513-2b3d-4157-9573-3b534c649798",
     },
     {
       id: 1,
       title: "After Breakfast",
-      checkBoxState: false,
       image:
         "https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fbreakfast.png?alt=media&token=48a93895-1232-4b66-8a1c-a5d28633fd3e",
     },
     {
       id: 2,
       title: "Having Lunch/Dinner",
-      checkBoxState: false,
       image:
         "https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Flunch-time.png?alt=media&token=e79c7049-41dd-4cf6-87da-a154ec52cca9",
     },
     {
       id: 3,
       title: "After work",
-      checkBoxState: false,
       image:
         "https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fhard-work.png?alt=media&token=8c98b4d8-ba62-4550-adf4-8bdf999d4a41",
     },
     {
       id: 4,
       title: "Before Bed",
-      checkBoxState: false,
       image:
         "https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fmoon.png?alt=media&token=da54b17a-0516-48bd-a038-6c40bea4e50d",
     },
@@ -83,14 +68,25 @@ const SetReminderScreen = ({ route, navigation }) => {
       image:
         "https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fadd%20task.png?alt=media&token=2c903988-589b-40c8-be7e-579b8586018a",
     },
-  ];
+  ]);
 
-  const handleCardPress = (title, id) => {
-    console.log(title);
-    console.log(id);
-    setSelectedCard(title);
-    setReminderId(id);
+  const toggleBottomNavigationView = () => {
+    setVisible(!visible);
+  };
+
+  useEffect(() => {
+    currentTime();
+  }, []);
+
+  const handleCardPress = (list) => {
+    console.log("list:Press ", list.id);
     setDailyReminder(true);
+    setReminderObject({
+      id: list.id,
+      title: list.title,
+      time: reminderTime,
+    });
+    console.log("reminder objectttt: ", reminderObject);
   };
 
   const currentTime = () => {
@@ -102,11 +98,6 @@ const SetReminderScreen = ({ route, navigation }) => {
   };
 
   const setReminder = () => {
-    // alert();
-    console.log("inside set reminder");
-    console.log(reminderTime);
-    console.log("reminder type: ", selectedCard);
-    console.log("daily reminder:", dailyReminder);
     Alert.alert(null, "Reminder set", [
       {
         text: "OK",
@@ -144,90 +135,73 @@ const SetReminderScreen = ({ route, navigation }) => {
   };
 
   const renderCardRow = (start, end) => {
-    console.log("data id:", cardData.id);
-    // if (end == cardData.length) {
-    //   return <SetReminderCard title={cardData.title} image={cardData.image} />;
-    // } else {
     return (
       <View style={styles.cardContainer}>
         {cardData.slice(start, end).map((data) => {
-          console.log(data.id);
-          if (data.id !== 5) {
-            return (
-              <TouchableOpacity
-                key={data.id}
-                onPress={() => {
-                  handleCardPress(data.title, data.id);
-                }}
-              >
-                <SetReminderCard
-                  checkBoxState={data.checkBoxState}
-                  title={data.title}
-                  image={data.image}
-                />
-              </TouchableOpacity>
-            );
-          }
-          if (data.id == 5) {
-            return (
-              <TouchableOpacity
-                key={data.id}
-                onPress={toggleBottomNavigationView}
-              >
-                <SetReminderCard title={data.title} image={data.image} />
-              </TouchableOpacity>
-            );
-          }
+          return <SetReminderCard key={data.id} list={data} />;
         })}
       </View>
     );
     // }
   };
 
-  const SetReminderCard = ({
-    title,
-    image,
-    isActive,
-    checkBoxState,
-    reminderId,
-  }) => {
-    const [isSelected, setSelection] = useState(false);
-    const [checked, setChecked] = useState(false);
-    // key = { reminderId };
-    const check = () => {
-      console.log("hello");
-      console.log(image);
-    };
-    return (
-      <View style={styles.setReminderCardContainer}>
-        {/* <TouchableOpacity onPress={check}> */}
-        {/*     <Checkbox value={isSelected} onValueChange={setSelection} /> */}
-        <Checkbox
-          status={checkBoxState ? "checked" : "unchecked"}
-          onPress={() => {
-            console.log(isActive);
-            setChecked(checkBoxState);
-          }}
-        />
-        <Image
-          resizeMode="contain"
-          style={{
-            height: "40%",
-            width: "60%",
-            alignSelf: "center",
-          }}
-          source={{
-            uri: image,
-          }}
-        />
-
-        <Text style={{ textAlign: "center", marginTop: 2 }}>{title}</Text>
-        {/* </TouchableOpacity> */}
-      </View>
-    );
+  const SetReminderCard = ({ list }) => {
+    if (list.id != 5) {
+      return (
+        <View>
+          <TouchableOpacity
+            style={[
+              styles.setReminderCardContainer,
+              selectedCard === list.id && styles.selectedCardColor,
+            ]}
+            onPress={() => handleCardPress(list)}
+          >
+            <Image
+              resizeMode="contain"
+              style={{
+                height: "70%",
+                width: "60%",
+                alignSelf: "center",
+              }}
+              source={{
+                uri: list.image,
+              }}
+            />
+            <Text style={{ textAlign: "center", marginTop: 2 }}>
+              {list.title}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <TouchableOpacity
+            style={[
+              styles.setReminderCardContainer,
+              selectedCard === list.id && styles.selectedCardColor,
+            ]}
+            onPress={toggleBottomNavigationView}
+          >
+            <Image
+              resizeMode="contain"
+              style={{
+                height: "70%",
+                width: "60%",
+                alignSelf: "center",
+              }}
+              source={{
+                uri: list.image,
+              }}
+            />
+            <Text style={{ textAlign: "center", marginTop: 2 }}>
+              {list.title}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   };
-
-  const [active, setActive] = useState(false);
 
   return (
     <View>
@@ -253,84 +227,6 @@ const SetReminderScreen = ({ route, navigation }) => {
       {renderCardRow(0, 3)}
       {renderCardRow(3, 6)}
 
-      {/* <View>
-        <View style={styles.cardContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              handleCardPress("After getting out of bed");
-              setActive(!active);
-            }}
-          >
-            <SetReminderCard
-              isActive={active}
-              setActive={setActive}
-              title="After getting out of bed"
-              image="https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fsunrise.png?alt=media&token=5c7f0513-2b3d-4157-9573-3b534c649798"
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              handleCardPress("After Breakfast");
-              setActive(!active);
-            }}
-          >
-            <SetReminderCard
-              isActive={active}
-              title="After Breakfast"
-              image="https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fbreakfast.png?alt=media&token=48a93895-1232-4b66-8a1c-a5d28633fd3e"
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-              handleCardPress("Having Lunch/Dinner");
-              setActive(!active);
-            }}
-          >
-            <SetReminderCard
-              isActive={active}
-              title="Having Lunch/Dinner"
-              image="https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Flunch-time.png?alt=media&token=e79c7049-41dd-4cf6-87da-a154ec52cca9"
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.cardContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              handleCardPress("After Work");
-              setActive(!active);
-            }}
-          >
-            <SetReminderCard
-              isActive={active}
-              title="After Work"
-              image="https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fhard-work.png?alt=media&token=8c98b4d8-ba62-4550-adf4-8bdf999d4a41"
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-              handleCardPress("Before Bed");
-              setActive(!active);
-            }}
-          >
-            <SetReminderCard
-              title="Before Bed"
-              image="https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fmoon.png?alt=media&token=da54b17a-0516-48bd-a038-6c40bea4e50d"
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={toggleBottomNavigationView}>
-            <SetReminderCard
-              isActive={active}
-              title="Add your own"
-              image="https://firebasestorage.googleapis.com/v0/b/mindcare-691a2.appspot.com/o/set-reminder-images%2Fadd%20task.png?alt=media&token=2c903988-589b-40c8-be7e-579b8586018a"
-            />
-          </TouchableOpacity>
-        </View>
-      </View> */}
-
       <View>
         <View
           style={{
@@ -338,13 +234,12 @@ const SetReminderScreen = ({ route, navigation }) => {
             justifyContent: "space-around",
             width: "50%",
             alignSelf: "center",
-            marginTop: 10,
+            marginTop: 5,
           }}
         >
           <Text>at</Text>
-          {/* <TextInput style={styles.textInput} value={reminderTime}></TextInput> */}
           <View style={styles.textInput}>
-            <Text>{reminderTime}</Text>
+            <Text>{reminderObject.time}</Text>
             <TouchableOpacity>
               <Text>
                 <Entypo
@@ -367,21 +262,19 @@ const SetReminderScreen = ({ route, navigation }) => {
           onCancel={hideDatePicker}
         />
       </View>
-      {selectedCard != null && dailyReminder && (
+      {reminderObject.title != null && dailyReminder && (
         <View
           style={{
-            height: 50,
-            // backgroundColor: "yellow",
+            height: 30,
             flexDirection: "row",
             justifyContent: "space-around",
-            marginTop: 15,
+            marginTop: 10,
           }}
         >
           <Text
             style={{
               fontFamily: "Inter_700Bold",
               fontSize: 17,
-              marginTop: 8,
             }}
           >
             Daily Reminder
@@ -391,14 +284,10 @@ const SetReminderScreen = ({ route, navigation }) => {
             onValueChange={onToggleDailyReminder}
             trackColor={{ true: "black", false: color.lightGrey }}
             thumbColor={reminderTime ? "white" : "white"}
+            style={{ marginBottom: 5 }}
           />
         </View>
       )}
-      {/* <Button
-        onPress={toggleBottomNavigationView}
-        //on Press of the button bottom sheet will be visible
-        title="Show Bottom Sheet"
-      /> */}
 
       <BottomSheet
         visible={visible}
@@ -418,13 +307,7 @@ const SetReminderScreen = ({ route, navigation }) => {
               onPress={toggleBottomNavigationView}
             />
           </Text>
-          <View
-          // style={{
-          //   flex: 1,
-          //   flexDirection: "column",
-          //   justifyContent: "space-between",
-          // }}
-          >
+          <View>
             <Text
               style={{
                 textAlign: "center",
@@ -474,8 +357,6 @@ const SetReminderScreen = ({ route, navigation }) => {
           style={styles.button}
           onPress={setReminder}
           disabled={dailyReminder && selectedCard ? false : true}
-
-          // onSubmit={handleSubmit}
         >
           <Text
             style={{
@@ -526,7 +407,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: "100%",
     height: 280,
-    // justifyContent: "center",
     alignItems: "center",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
@@ -538,6 +418,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: "white",
     elevation: 5,
+  },
+  selectedCardColor: {
+    backgroundColor: "yellow",
   },
 });
 
